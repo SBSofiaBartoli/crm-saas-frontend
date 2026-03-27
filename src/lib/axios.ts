@@ -6,7 +6,8 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
+    const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+    const token = match ? decodeURIComponent(match[1]) : null;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
