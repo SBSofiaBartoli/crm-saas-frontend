@@ -1,13 +1,14 @@
 import { User, AuthResponse } from "@/types";
 
 export const saveAuth = (data: AuthResponse) => {
-  localStorage.setItem("token", data.token);
+  document.cookie = `token=${data.token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Strict`;
   localStorage.setItem("user", JSON.stringify(data.user));
 };
 
 export const getToken = (): string | null => {
   if (typeof window === "undefined") return null;
-  return localStorage.getItem("token");
+  const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : null;
 };
 
 export const getUser = (): User | null => {
@@ -17,7 +18,7 @@ export const getUser = (): User | null => {
 };
 
 export const clearAuth = () => {
-  localStorage.removeItem("token");
+  document.cookie = "token=; path=/; max-age=0";
   localStorage.removeItem("user");
 };
 
