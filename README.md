@@ -12,6 +12,7 @@ Interfaz web para la plataforma de gestión de cartera de clientes. Permite a ej
 
 ![Dashboard](./public/screens/dashboard.png)
 ![Clientes](./public/screens/clients.png)
+![Follows](./public/screens/follows.png)
 
 ---
 
